@@ -7,6 +7,9 @@ aili:
 the fastest in-memory index in the East 东半球最快并发索引
 
 
+3:
+C常用的数据结构和算法
+https://github.com/fragglet/c-algorithms
 
 
 
