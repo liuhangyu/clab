@@ -1,0 +1,7 @@
+*.o
+*.a
+*_test
+.tags
+generate_data
+data
+run.sh
