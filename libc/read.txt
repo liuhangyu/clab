@@ -1,0 +1,13 @@
+docker build -t libclab:1 .
+
+cd clab
+./chkshard  "./"  "switch-directory-chain" "./libshared.so"
+
+
+
+docker run -it -v /home/liuhy/clab/libc:/clab libclab:1 sh
+
+
+
+docker exec -it 2464a1b2a6c1 sh
+
