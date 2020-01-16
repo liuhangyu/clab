@@ -1,0 +1,10 @@
+[shared]2020/01/13 14:49:10.019441 libshared.go:39: license init 
+AppInfo:
+	Name: 	   switch-license
+	Version:   
+	Branch:    master
+	CommitID:  a6b0051
+	BuildTime: 2020-01-13 22:34:31
+
+[shared]2020/01/13 14:49:10.046051 libshared.go:141: get system file info failed from file
+[shared]2020/01/13 14:49:10.046104 libshared.go:205: get system file info failed from file
