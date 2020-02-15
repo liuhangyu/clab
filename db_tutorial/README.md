@@ -8,3 +8,6 @@ Run site locally:
 ```
 bundle exec jekyll serve
 ```
+
+
+g++ -std=gnu11 -O3  -fpermissive -Wpointer-arith -o main db.c  
