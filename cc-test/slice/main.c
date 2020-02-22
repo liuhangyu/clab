@@ -5,10 +5,10 @@
 
 const int LENGHT_STR = 5;
 
-char **make(char list[][100], int len)
+char **make(int len)
 {
     int i = 0;
-    // char **v = NULL;
+    char **list = NULL;
 
     if (len > 0)
     {
@@ -23,7 +23,7 @@ char **make(char list[][100], int len)
     return list;
 }
 
-int append(char slice[][LENGHT_STR], int args, ...)
+int append(char **slice, int args, ...)
 {
     int i = 0, str_len = 0;
     char *ptr = NULL;
@@ -38,16 +38,20 @@ int append(char slice[][LENGHT_STR], int args, ...)
         str_len = strlen(ptr);
         if (LENGHT_STR > str_len)
         {
-            strncpy((slice)[i], ptr, strlen(ptr));
+            // strncpy((slice)[i], ptr, strlen(ptr));
+            sprintf(slice[i], "%s", ptr);
         }
         else
         {
-            printf("%p\n", (slice)[i]);
+            // printf("%p\n", (slice)[i]);
             // free(slice[i]);
             // *(slice[i]) = (char *)malloc((str_len + 1) * sizeof(char));
             // strncpy(slice[i], ptr, strlen(ptr));
+            printf("too length %ld %ld\n", strlen(slice[i]), sizeof(slice[i]));
+            slice[i] = (char *)realloc(slice[i], 20 * sizeof(char));
+            sprintf(slice[i], "%s", ptr);
         }
-        printf("%s %s\n", ptr, slice[i]);
+        // printf("%s %s\n", ptr, slice[i]);
     }
 
     /* 清理为 valist 保留的内存 */
@@ -59,15 +63,15 @@ int append(char slice[][LENGHT_STR], int args, ...)
 int main(int argc, char **argv)
 {
     int i = 0;
-    char *slice[100] = NULL;
-    slice = make(slice, 100);
+    char **paddr = NULL;
+    paddr = make(2);
 
-    append(slice, 2, "hello world1", "hello world2");
-    // if (p)
+    append(paddr, 2, "hello world1", "122");
+    if (paddr)
     {
-        for (i = 0; strlen(p[i]) != 0; i++)
+        for (i = 0; i < 2; i++)
         {
-            printf("main-> %s %ld\n", p[i], strlen(p[i]));
+            printf("main-> %s %ld\n", paddr[i], strlen(paddr[i]));
         }
     }
 }
