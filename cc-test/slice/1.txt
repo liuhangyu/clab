@@ -1,1 +1,0 @@
-3429848:NC_000023.11ID=exon-XM_011545511.2-17	Parent=rna-XM_011545511.2	Dbxref=GeneID:389840,Genbank:XM_011545511.2,HGNC:HGNC:31689,MIM:300820	gbkey=mRNA	gene=MAP3K15	product=mitogen-activated
