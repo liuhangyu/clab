@@ -1,4 +1,4 @@
-C
+C  印度人写的
 ========
 
 For a full list of all algorithms, please see: [DIRECTORY.md](https://github.com/TheAlgorithms/C/blob/master/DIRECTORY.md)
