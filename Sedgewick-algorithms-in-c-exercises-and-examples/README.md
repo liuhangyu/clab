@@ -1,4 +1,6 @@
 Algorithms in C
+美国大学教授写的
+
 ================================================
 My takes of **Algorithms in C - Fundamentals, Data Structures, Sorting, Searching (3rd Edition)** book by **Robert Sedgewick**.
 It contains code for both the **examples** and the **exercises**.
