@@ -60,7 +60,8 @@ int main(int argc, char *argv[])
 
 	bzero(&serveraddr, sizeof(serveraddr));
 	serveraddr.sin_family = AF_INET;
-	char *local_addr = "192.168.199.8";
+	// char *local_addr = "192.168.199.8";
+	char *local_addr = "0.0.0.0";
 	inet_aton(local_addr, &(serveraddr.sin_addr));
 	serveraddr.sin_port = htons(SERV_PORT);
 
