@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "lagrange_theorem.C": "cpp",
+        "MEDIAN.C": "cpp",
+        "MEAN.C": "cpp",
+        "Seidal.C": "cpp"
+    }
+}
