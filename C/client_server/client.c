@@ -5,6 +5,7 @@
 #include <stdlib.h> 
 #include <unistd.h>
 #include <string.h> 
+#include <errno.h>
 #include <sys/socket.h> 
 #define MAX 80 
 #define PORT 8080 
@@ -17,12 +18,13 @@ void func(int sockfd)
         bzero(buff, sizeof(buff)); 
         printf("Enter the string : "); 
         n = 0; 
-        while ((buff[n++] = getchar()) != '\n') 
-            ; 
+        // while ((buff[n++] = getchar()) != '\n') 
+        //     ; 
+        sprintf(buff,"%s", "hello world..........");
         write(sockfd, buff, sizeof(buff)); 
         bzero(buff, sizeof(buff)); 
         read(sockfd, buff, sizeof(buff)); 
-        printf("From Server : %s", buff); 
+        printf("From Server : %s \n", buff); 
         if ((strncmp(buff, "exit", 4)) == 0) { 
             printf("Client Exit...\n"); 
             break; 
@@ -50,13 +52,19 @@ int main()
     servaddr.sin_addr.s_addr = inet_addr("127.0.0.1"); 
     servaddr.sin_port = htons(PORT); 
   
-    // connect the client socket to server socket 
-    if (connect(sockfd, (SA*)&servaddr, sizeof(servaddr)) != 0) { 
-        printf("connection with the server failed...\n"); 
-        exit(0); 
-    } 
-    else
-        printf("connected to the server..\n"); 
+   int i;
+   for (i=0; i<100; i++) {
+        // connect the client socket to server socket 
+        if (connect(sockfd, (SA*)&servaddr, sizeof(servaddr)) != 0) { 
+            printf("connection with the server failed...\n"); 
+              printf("errno=%d, %s\n",errno, strerror(errno));
+            exit(0); 
+        } 
+        else
+            printf("connected to the server..\n"); 
+   }
+  
+   
   
     // function for chat 
     func(sockfd); 

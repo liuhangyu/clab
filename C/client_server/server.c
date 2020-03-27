@@ -23,13 +23,13 @@ void func(int sockfd)
         // read the message from client and copy it in buffer 
         read(sockfd, buff, sizeof(buff)); 
         // print buffer which contains the client contents 
-        printf("From client: %s\t To client : ", buff); 
+        printf("From client: %s\t To client : \n", buff); 
         bzero(buff, MAX); 
         n = 0; 
         // copy server message in the buffer 
-        while ((buff[n++] = getchar()) != '\n') 
-            ; 
-  
+        // while ((buff[n++] = getchar()) != '\n') 
+        //     ; 
+        sprintf(buff,"%s", "respone >>> hello world..........");
         // and send that buffer to client 
         write(sockfd, buff, sizeof(buff)); 
   
@@ -71,7 +71,7 @@ int main()
         printf("Socket successfully binded..\n"); 
   
     // Now server is ready to listen and verification 
-    if ((listen(sockfd, 5)) != 0) { 
+    if ((listen(sockfd, 1)) != 0) { 
         printf("Listen failed...\n"); 
         exit(0); 
     } 
@@ -91,6 +91,7 @@ int main()
     // Function for chatting between client and server 
     func(connfd); 
   
+    printf("%s", "finish...");
     // After chatting close the socket 
     close(sockfd); 
 } 
