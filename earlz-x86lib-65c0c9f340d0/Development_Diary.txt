@@ -1,0 +1,308 @@
+This is just a diary of what problems I had implementing things, and exactly
+what I do each day...
+:February 17, 2008:
+(Jordan)
+7:45pm
+Well, finally decided to try working on this some more..
+Current plans are in this order:
+1. Add IO port out/in 16bit DX opcodes(only hole in 8086)
+2. Switch multi-branch to trunk working copy
+3. Document public code changes in latest version of x86Lib
+4. Document developer info for latest verison of x86Lib
+5. Add 186 opcodes
+6. Add 286 opcodes
+
+Yea... sadly, work on this will still be very slowed... I now have an actual
+job(at McDonalds) and I work most everyday, so...
+
+Bug Fixing/cpu specific-correctness todo:
+1st priority:
+1. Add interrupt stack to make it so that if an external int is done during a
+	cli period, then the int is done when sti is done
+
+2nd priority:
+
+3rd priority:
+1. Add interrupt inhibiting after mov into SS
+2. Possible change on IO port management because 'outing' a word actually writes
+	to 2 ports, rather than twice to 1 port(each port is only 8 bits)
+
+
+
+:January 14, 2008:
+(Jordan)
+9:12pm
+w0  lol...but on
+with development... I got memory locking working, and I finally fixed everthing
+so that in the test implementation, there are now two CPUs, though only one is
+used. But the other CPU can easily be "activated". I just don't know what to do
+with the other CPU..but I can confirm it works at least...
+The current thing I'm wondering on how to do is that there is some kind of video
+card that had an 8086 in it. Well, I was wondering how I could go about easily
+having two different sets of memory and ports, and them interface with each
+other.
+
+:January 13, 2008:
+(Jordan)
+10:03pm
+Ok, I have almost completed the Multi-branch...well, really I have... it came
+down to only about 6 or 7 hours of coding..thank God for copy-paste-find-replace
+Also, I have changed quite a few things the public interface of x86CPU(in both
+the multi-branch and working version)
+Most notable changes are the switching in construction of x86CPU, it is now
+(memory,ports,cpu_level,flags)
+Also, there is now a CPU reset function, locking instructions(only multi-branch)
+And finally, there is CPU state loading and saving. (and constructing from a
+save structure)
+
+
+:January 5, 2008:
+(Jordan)
+11:55pm
+After about 2 or 3 hours of debugging RCL I realized that 0x29+1=0x2A, not 0x30
+..well...that's probably one of the dumbest mistakes I have made in this project
+but, now I am aware that I can do rotates without having a loop...but I can
+adopt the code from Bochs later...right now, I just want all this crap done...
+
+:January 03, 2008:
+(Jordan)
+9:07pm
+Yes, I am still alive...but making ringtones is more important than programming
+
+:January 01, 2008:
+(Jordan)
+5:59pm
+Well, finally got around to messing and testing the shift instructions....
+SAR,SHL,and SHR now have their functions working, I just now must implement
+the (rm,1) variations of those opcodes...after that, the only things left for
+opcodes to do are
+1. lods
+2. rcl
+3. rcr
+4. rol
+5. ror
+6. scas
+7. stos
+8. wait
+9. xlat
+wow...less than 10 opcodes and some testing, and this thing is ready for a beta
+release!
+also, came up with a way to test if flags and such are being set properly on all
+the math opcodes. Basically what to do is make a small 16bit program that dumps
+the flags after a set of test opcodes and such. Then, use that same opcode test
+set and dump the flags are those in x86Lib. Then, just compare them and fix any
+bugs..
+
+9:59pm
+ror and rol are now working....I have their "backend" functions working anyway..
+I'll finish implementing those and the shift instruction opcode sets later...
+
+
+:December 28, 2007:
+(Jordan)
+11:08pm
+hmm...I'm really tired, but I'll write here anyway...
+I have added ReadOffset() to ModRM16 class because LEA is completely useless
+and must get the offset rather than do a mov reg,imm16 thing...who ever designed
+that is an idiot that I wish to punch in the face...
+I also have completed LDS, LES, ADC, JCXZ, LAHF, LOOPE/NE, and SAHF.
+Next on my list is LOCK. I plan to get every opcode for 8086 added by Feb 1st.
+I also plan to make a release of some sort by Feb 31st. Current things that need
+to be done for a beta release:
+1. Opcode support for 8086
+2. Modifying of SS or SP to CLI, and then STI
+3. Implementation Guide
+4. A basic Development guide(for the internals)
+5. Website completion.
+6. Portability testing and possibly MSVC++ porting
+think that's about it...I'm going to bed now...
+
+
+:December 26, 2007:
+(Jordan)
+4:31pm
+Well, I have got lazy and stopped updating this thing for a while, but oh well..
+While making example code for the implementation guide, I have discovered many
+bugs with instructions I thought I tested well enough...but oh well...I'm
+discovering bugs more by black box than by grey or white box methods...
+
+:December 11, 2007:
+(Jordan)
+4:49pm
+hmmm...what to do? hmm...Oh ! I know! program! lol...
+yea, so I got the or set of opcodes finished and lightly tested last night...
+guess I'll work on getting not, xor, and neg today..
+
+:December 10, 2007:
+(Jordan)
+5:42pm
+Ok finished out the and opcodes(including groups) though I haven't tested them..
+
+
+:December 9, 2007:
+(Jordan)
+1:26pm
+Finally figured out that stupid bug...fixed it by simply adding b to the end of "r"
+for fopen for bios loading...
+
+
+:December 4, 2007:
+(Jordan)
+4:56pm
+Ok, finally started working some on this project after about a week of a break..
+I have been thinking of things that can be added, and multi-cpu support really
+doesn't seem like too hard of a thing to do...but to make it multithreaded and
+everything(err, multithreaded safe) would be kidna hard, but it may be possible.
+basically, if regs and flags and everything were read from a CPU class, then it
+could be possible... the onyl problem is that I really have no idea how multi-cpu
+works, especially for pre-286 cpus...but maybe one day, after 8086 emulation,
+I'll make a branch and work on that...
+
+
+:November 27, 2007:
+(Jordan)
+6:07pm
+Ok, fixed everything so that it compiles and links fine now...
+
+9:02pm
+K, now completed imul single opcode versions...
+--TODO: Add bitwise instructions: shr, shl, and, or, xor, not.
+
+:November 26, 2007:
+(Jordan)
+6:28pm
+Now added mul instructions, and I'm now off to add imul...
+
+10:28pm
+Ok, I've fixed some bugs in idiv, and made it easier to manipulate signed integers
+using C's (usually) unsigned behavior. The way it works is quite simple, but
+apparently, I wasn't looking for the not() (which is actually logical not, or !)
+or the - (negation) things, I was for whatever reason confused...I was actually
+wanting the ~ (bitwise not) operator... so I fixed those problems, and made the
+source of idiv instructions considerably easier to read, and possibly optimized
+it a bit...
+
+10:36pm
+Ok, actually static inline'd the sign functions. Also, made it so that Unsignxx()
+now takes only one store variable, so that I can easily use it for other functions
+that don't actually use the combination of two variables...
+and....bed...
+--TODO! Sort out x86Lib.h into two seperate header files, one, x86Lib.h, but have
+another one named something like x86Lib_build.h or something so that inorder to
+use the library, you don't need a 15kb header file full of stuff you don't need
+Plus, it'll speed up compile time for if you are not using the internal stuff...
+
+11:03pm
+Ok, I'm done with that mostly...soem random linking error with undefined, but
+I'll do that tommorrow....
+
+:November 25, 2007:
+(Jordan)
+2:27pm
+Ok, finally figured out a very weird bug in div_rm16(). Apparently, the - operator
+is not the same as the not() operator... though, they should mean the same thing,
+they obviously are not because -0xFFFF=1, but not(0xFFFF)=0. it doesn't make
+sense to me, but I quit trying to understand the weird parts of C/C++ a while
+ago..
+
+5:58pm
+Ok, I have now added CPU levels. Like 8086 only emulation, and all that sort of
+stuff...now I'm quite bored/angry, so I can't really programm..
+
+
+:November 24, 2007:
+(Jordan)
+11:48am
+Yea...that whole extern thing doesn't quite work. By giving it extern, it should
+be forced to not inline the function, but instead, the optimizer doesn't follow
+directions, and does what it wants, inline the functions, causing multiple
+definitions errors...
+
+2:06pm
+Well, I made a half way practical implementation of x86Lib. I have put it into
+a project I made before, Open86. The implementation does not work with interrupts,
+but I can't even remember if Open86's interrupt system worked anyway...
+But, I used unmodified assembly code(except for replacing a jmp direct, note, need
+to implement that) to display the entire character set, and it worked! Open86 was
+made in C, so I got experience mixing C++ and C code with a layer file...
+I am sure that the implementation is quite slow due to the hack job of coding it
+was, but it works none-the-less! yay!
+
+5:44pm
+Now have finished off all of the jmp opcodes, and they are all fairly well tested
+so... its a good template for when I expand it to calls...
+
+7:54pm
+I have been going through Open86's opcode list, and I've discovered a few holes
+in x86Lib's opcode map... I have now added all of inc and dec.  I have completely
+finished off push, pop, and all adjustment instructions(AAx). Also, as an added
+bonus, I have even added  salc! So I am slowly, but surely, getting everything
+built in...
+
+9:05pm
+Ok, I added div instructions just because I wanted a challenge... suprisingly,
+unsigned div worked almost the first time I coded it, but idiv I had a few
+problems with due to typos and such bug tracing...but now they both work! I
+will probably implement idiv_rm16 tonight some later time, or tommorrow...
+
+
+
+:November 23,2007:
+last night I thought of some stuff for this. First of all, so that optimizations don't
+interfer with CalcultePF(native code version) I can use extern and such...ahh...I
+miss her already :( programming is the only thing to take my mind off of her...lol
+
+
+:November 22, 2007:
+(Jordan)
+12:07am
+Yea, really late... but I can't really sleep due to happiness...so I'll program!
+Right now, I need to construct a test set to test all the newly added(and
+untested) opcodes. that is what I am doing now, and I think I should at least
+give it basic testing before I move onto other opcodes and such...
+12:17am
+Ok, I've marked what things have been tested, and the beginnings of a test opcode
+routine...
+Now I really think I should try to work on a simple website...
+
+
+
+:November 21, 2007:
+(Jordan)
+12:32pm
+Ok, just got done coding ALL of the mov opcodes, and most sub and add opcodes.
+They are untested, but it is fairly routine coding, so what I wasn't for sure
+on, I tested(and it worked) and what I've done a million times before, I left
+untested...eventually, I need to build a huge opcode test program...
+6:16pm
+fixed this file to not go over the 80 column limit thing...so now it should look
+a bit better...
+6:52pm
+Wow...just got all the main stuff for cmp added(groups included)...now I just
+have to add sign extending stuff...also, cmp_ax_imm16 is 0x3D...yea, like the
+movie...lol...this is what happens when I program when tired...hopefully I didn't
+make many mistakes...
+7:01pm
+Now I got sign extending and such things done also...so I have 4 opcode groups
+fully done! Mov, cmp, sub, add...yep...I'm happy...not I suppose I should give it
+all a thorough testing...
+
+
+
+
+
+:November 20, 2007:
+(Jordan)
+9:49pm
+Started this file.
+Currently Adding sub and add opcodes, I have yet to test them, but they look
+like they "should" work.. I'll write a timestamp each time I type into this...
+10:18pm
+Ok, I've now got a good way of doing groups...Since they all use ModRM16, I make
+the class in the group, then I make a switch off of GetExtra to tell which
+opcode, then I just call the opcode include function, passing ModRM16 to it...
+pretty nifty I think...btw, think I'm gonna write here when I get bored...
+10:57pm
+Ok, going to bed... or at least closing down development tonight..
+Got sub opcodes added to InstallOp and such... and groups do work..
+
